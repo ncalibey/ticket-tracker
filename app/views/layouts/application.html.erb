@@ -3,13 +3,36 @@
   <head>
     <title>Tickets</title>
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <section class="container">
+      <nav class="main-nav">
+        <ul class="left">
+          <li><strong>Ticketing</strong></li>
+          <li><%= link_to "Projects", projects_path %></li>
+          <li><%= link_to "Tickets", tickets_path %></li>
+          <li><%= link_to "Tags", tags_path %></li>
+        </ul>
+
+        <ul class="right">
+          <li>
+          <% if current_user %>
+            Signed in as <%= current_user.name %> <%= link_to "Logout", '/logout' %>
+          <% else %>
+            <%= link_to 'Login', '/login' %> or <%= link_to 'Signup', '/signup' %>
+          <% end %>
+          </li>
+        </ul>
+      </nav>
+
+      <p id="notice"><%= notice %></p>
+      <p id="alert"><%= alert %></p>
+
+      <%= yield %>
+    </section>
   </body>
 </html>
