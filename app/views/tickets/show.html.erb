@@ -1,0 +1,54 @@
+<h1><%= @ticket.name %></h1>
+
+<p><%= @ticket.body %></p>
+
+<p>
+  <strong>Tags:</strong>
+  <%= tag_list(@ticket) %>
+</p>
+
+<p class="actions">
+  <%= link_to 'Edit', edit_ticket_path(@ticket) %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Creator</th>
+      <th>Assignee</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @ticket.status.titleize %></td>
+      <td><%= @ticket.creator.name %></td>
+      <td><%= @ticket.assignee ? @ticket.assignee.name : "-" %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Comments</h2>
+
+<% if @ticket.comments.any? %>
+  <% @ticket.comments.each do |comment| %>
+    <div class="comment">
+      <p><%= comment.body %></p>
+      <p>
+        <em>
+          posted by
+          <%= comment.creator.name %>
+          <%= time_ago_in_words(comment.created_at) %> ago
+          <% if comment.created_at != comment.updated_at %>
+            - updated <%= time_ago_in_words(comment.updated_at) %> ago
+          <% end %>
+        </em>
+      </p>
+      <p><%= link_to "Edit", edit_ticket_comment_path(@ticket, comment) %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>There are no comments.</p>
+<% end %>
+
+<% render 'comments/form', comment: Comment.new %>

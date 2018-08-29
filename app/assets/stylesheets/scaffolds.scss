@@ -1,0 +1,33 @@
+#notice {
+  color: green;
+  margin-top: 1rem;
+}
+
+#alert {
+  color: #c00;
+  margin-top: 1rem;
+}
+
+.field_with_errors {
+  color: #c00;
+}
+
+#error_explanation {
+  margin-bottom: 20px;
+
+  h2 {
+    font-weight: bold;
+    color: #c00;
+    margin-bottom: 0;
+  }
+
+  ul li {
+    color: #900;
+    list-style: square;
+    margin-left: 2em;
+  }
+}
+
+.actions {
+  margin-top: 2rem;
+}
