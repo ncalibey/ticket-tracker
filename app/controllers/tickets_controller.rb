@@ -14,7 +14,7 @@ class TicketsController < ApplicationController
     end
 
     if params[:tag].present?
-      @tickets = @tickets.join(:tags).where("tags.id": params[:tag])
+      @tickets = @tickets.joins(:tags).where("tags.id": params[:tag])
     end
   end
 
@@ -34,6 +34,19 @@ class TicketsController < ApplicationController
     end
   end
 
+  def update
+    if @ticket.update(ticket_params)
+      redirect_to @ticket, notice: 'Ticket was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @ticket.destroy
+    redirect_to tickets_url, notice: 'Ticket was successfully destroyed.'
+  end
+
   private
 
   def set_ticket
@@ -41,6 +54,6 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:name, :body, :status, :project_id, :assignee_id, tags_ids: [])
+    params.require(:ticket).permit(:name, :body, :status, :project_id, :assignee_id, tag_ids: [])
   end
 end

@@ -1,0 +1,6 @@
+<h1>
+  <%= @comment.new_record? ? "Creating" : "Editing" %>
+  Comment
+</h1>
+
+<%= render 'form', comment: @comment %>

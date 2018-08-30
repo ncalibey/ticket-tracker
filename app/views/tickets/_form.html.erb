@@ -32,6 +32,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :assignee, "Assigned To" %>
+    <%= form.collection_select :assignee_id, User.all, :id, :name, id: :ticket_assignee_id, include_blank: "No one" %>
+  </div>
+
+  <div class="field">
     <%= form.label :tags %>
     <%= form.collection_select :tag_ids, Tag.alphabetical, :id, :name, {}, multiple: true, id: :ticket_tag_ids, size: Tag.count %>
   </div>
